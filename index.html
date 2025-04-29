@@ -304,8 +304,8 @@
   <section id="slideshow">
     <div class="slideshow-container">
       <img src="/Img/Img1.jpg" class="slide active" alt="Gambar 1" />
-      <img src="/Img/Img2.jpg" class="slide" alt="Gambar 2" /> <!-- Added back the missing image -->
-      <img src="/Img/Img3.jpg" class="slide" alt="Gambar 3" /> <!-- Added a new image to the slideshow -->
+      <img src="/Img/Img2.jpg" class="slide" alt="Gambar 2" /> 
+      <img src="/Img/Img3.jpg" class="slide" alt="Gambar 3"  /> 
     </div>
   </section>
 
@@ -331,21 +331,7 @@
   </section>
 
   <br>
-  <br>
   <!-- === Section: Gallery Memories with Captions === -->
-<div id="galeri-caption" style="text-align: center; margin-top: 30px;">
-  <h2 id="Memories" style="margin-bottom: 15px; color: #711c13;">Our Special Memories</h2>
-
-  <div style="display: flex; justify-content: center; align-items: center; min-height: 360px;">
-    <button id="prevPhoto">&#10094;</button>
-    <figure style="margin: 0 20px;">
-      <img id="mainPhoto" src="/Img/Tia.jpg" alt="Foto utama" class="gallery-photo" />
-      <figcaption id="mainCaption" style="color: #711c13; margin-top: 10px; font-size: 20px;">My Beautiful Wife</figcaption>
-    </figure>
-    <button id="nextPhoto">&#10095;</button>
-  </div>
-</div>
-
   
   
 <!-- === Audio Music === -->
@@ -414,44 +400,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   setInterval(createHeart, 300);
   animateHearts();
-
-  // Photo gallery
-  const photos = [
-    { src: '/Img/Tia.jpg', caption: 'My Beautiful Wife' },
-    { src: '/Img/Me&Tia.jpg', caption: 'Soon to be husband and wife' },
-    { src: '/Img/Family.jpg', caption: 'Us and my parents' },
-    { src: '/Img/Theatre.jpg', caption: 'Us at the movie theatre' }
-  ];
-
-  let currentIndex = 0;
-  const mainPhoto = document.getElementById('mainPhoto');
-  const mainCaption = document.getElementById('mainCaption');
-
-  function updatePhoto(index) {
-    mainPhoto.style.opacity = 0;
-    setTimeout(() => {
-      mainPhoto.src = photos[index].src;
-      mainCaption.textContent = photos[index].caption;
-      mainPhoto.style.opacity = 1;
-    }, 200);
-  }
-
-  document.getElementById('prevPhoto').addEventListener('click', () => {
-    currentIndex = (currentIndex - 1 + photos.length) % photos.length;
-    updatePhoto(currentIndex);
-  });
-
-  document.getElementById('nextPhoto').addEventListener('click', () => {
-    currentIndex = (currentIndex + 1) % photos.length;
-    updatePhoto(currentIndex);
-  });
-
-  document.querySelectorAll('.thumb-caption').forEach((thumb, index) => {
-    thumb.addEventListener('click', () => {
-      currentIndex = index;
-      updatePhoto(currentIndex);
-    });
-  });
 
   // Cover page & music
   const coverPage = document.getElementById("coverPage");
