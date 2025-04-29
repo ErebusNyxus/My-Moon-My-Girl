@@ -136,8 +136,8 @@
       color: white;
       border: 1px solid black;
       box-shadow: #000000 0px 0px 5px 0px;
-      padding: 20px;
-      width: 30%;
+      padding: 20px 3rem;
+      width: auto;
       font-size: 1.2rem;
       cursor: pointer;
       border-radius: 5px;
@@ -359,22 +359,67 @@
 <br>
 <br>
 <!-- === Footer === -->
-<header style="background-color: #711c13; color: white; padding: 20px; width: 100%; bottom: 0; left: 0;box-sizing: border-box;
+<footer style="background-color: #711c13; color: white; padding: 20px; width: 100%; bottom: 0; left: 0;box-sizing: border-box;
     position: relative;">
     <p style="word-spacing: 3px; text-align: center;">&copy; 2025 My Moon, My Girl. <br><br> With Love, Arka.</p>
-</header>
-  
+</footer>
 </body>
 <script>
 document.addEventListener('DOMContentLoaded', () => {
+  // Canvas setup
   const canvas = document.getElementById("heartCanvas");
-const ctx = canvas.getContext("2d");
+  const ctx = canvas.getContext("2d");
 
-const photos = [
-    { src: 'Tia.jpg', caption: 'My Beautiful Wife' },
-    { src: 'Me&Tia.jpg', caption: 'Soon to be husband and wife' },
-    { src: 'Family.jpg', caption: 'Us and my parents' }, // Fixed caption
-    { src: 'Theatre.jpg', caption: 'Us at the movie theatre' } // Added missing comma and corrected src
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  resizeCanvas();
+  window.addEventListener("resize", resizeCanvas);
+
+  // Heart animation
+  const hearts = [];
+
+  function createHeart() {
+    hearts.push({
+      x: Math.random() * canvas.width,
+      y: -20,
+      size: Math.random() * 10 + 10,
+      speed: Math.random() * 2 + 1,
+      opacity: Math.random() * 0.5 + 0.5
+    });
+  }
+
+  function drawHearts() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    hearts.forEach((h, i) => {
+      ctx.fillStyle = `rgba(255, 0, 102, ${h.opacity})`;
+      ctx.beginPath();
+      ctx.moveTo(h.x, h.y);
+      ctx.bezierCurveTo(h.x - h.size / 2, h.y - h.size / 2, h.x - h.size, h.y + h.size / 3, h.x, h.y + h.size);
+      ctx.bezierCurveTo(h.x + h.size, h.y + h.size / 3, h.x + h.size / 2, h.y - h.size / 2, h.x, h.y);
+      ctx.fill();
+      h.y += h.speed;
+
+      // Remove hearts that are out of screen
+      if (h.y > canvas.height) hearts.splice(i, 1);
+    });
+  }
+
+  function animateHearts() {
+    drawHearts();
+    requestAnimationFrame(animateHearts);
+  }
+
+  setInterval(createHeart, 300);
+  animateHearts();
+
+  // Photo gallery
+  const photos = [
+    { src: '/Img/Tia.jpg', caption: 'My Beautiful Wife' },
+    { src: '/Img/Me&Tia.jpg', caption: 'Soon to be husband and wife' },
+    { src: '/Img/Family.jpg', caption: 'Us and my parents' },
+    { src: '/Img/Theatre.jpg', caption: 'Us at the movie theatre' }
   ];
 
   let currentIndex = 0;
@@ -407,80 +452,30 @@ const photos = [
     });
   });
 
-
-function resizeCanvas() {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-}
-resizeCanvas();
-window.addEventListener("resize", resizeCanvas);
-
-const hearts = [];
-
-function createHeart() {
-  const x = Math.random() * canvas.width;
-  const size = Math.random() * 10 + 10;
-  hearts.push({
-    x: x,
-    y: -20,
-    size: size,
-    speed: Math.random() * 2 + 1,
-    opacity: Math.random() * 0.5 + 0.5
-  });
-}
-
-function drawHearts() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  for (let i = 0; i < hearts.length; i++) {
-    const h = hearts[i];
-    ctx.fillStyle = `rgba(255, 0, 102, ${h.opacity})`; // Fixed the syntax for rgba
-    ctx.beginPath();
-    ctx.moveTo(h.x, h.y);
-    ctx.bezierCurveTo(h.x - h.size / 2, h.y - h.size / 2, h.x - h.size, h.y + h.size / 3, h.x, h.y + h.size);
-    ctx.bezierCurveTo(h.x + h.size, h.y + h.size / 3, h.x + h.size / 2, h.y - h.size / 2, h.x, h.y);
-    ctx.fill();
-    h.y += h.speed;
-  }
-
-  // Hapus hati yang keluar layar
-  for (let i = hearts.length - 1; i >= 0; i--) {
-    if (hearts[i].y > canvas.height) {
-      hearts.splice(i, 1);
-    }
-  }
-}
-
-function animateHearts() {
-  drawHearts();
-  requestAnimationFrame(animateHearts);
-}
-
-setInterval(createHeart, 300);
-animateHearts();
-
-  const toggleButton = document.querySelector('.menu-toggle');
-  const navMenu = document.querySelector('nav ul');
+  // Cover page & music
   const coverPage = document.getElementById("coverPage");
   const openMainBtn = document.getElementById("openMainBtn");
   const audio = document.getElementById("Theme");
 
-  // Menyembunyikan halaman cover dan memulai pemutaran musik saat tombol "Buka" diklik
   openMainBtn.addEventListener("click", () => {
-  coverPage.classList.add("slide-out");
-  setTimeout(() => {
-    coverPage.style.display = "none";
-    audio.play().catch(() => {
-      console.warn("Pemutaran otomatis dicegah oleh browser.");
-    });
-  }, 800); // Sesuaikan dengan durasi animasi
-});
+    coverPage.classList.add("slide-out");
+    setTimeout(() => {
+      coverPage.style.display = "none";
+      audio.play().catch(() => {
+        console.warn("Autoplay was prevented by the browser.");
+      });
+    }, 800); // Match animation duration
+  });
 
-  // Toggle menu navigasi
+  // Navigation menu toggle
+  const toggleButton = document.querySelector('.menu-toggle');
+  const navMenu = document.querySelector('nav ul');
+
   toggleButton.addEventListener('click', () => {
     navMenu.classList.toggle('active');
   });
 
-  // Popup surat logic
+  // Popup letter logic
   const popup = document.getElementById("letterPopup");
   const openBtn = document.getElementById("openLetter");
   const closeBtn = popup.querySelector(".close");
@@ -493,31 +488,27 @@ animateHearts();
     popup.style.display = "none";
   });
 
-  // Close popup saat klik di luar area popup
   window.addEventListener('click', (e) => {
     if (e.target === popup) {
       popup.style.display = "none";
     }
   });
 
-  // Slideshow logic
+  // Slideshow
   let slideIndex = 0;
   const slides = document.querySelectorAll('.slideshow-container .slide');
 
   function showSlides() {
-    slides.forEach((slide, i) => {
-      slide.classList.remove('active');
-    });
+    slides.forEach(slide => slide.classList.remove('active'));
 
     slideIndex++;
     if (slideIndex > slides.length) slideIndex = 1;
 
     slides[slideIndex - 1].classList.add('active');
-    setTimeout(showSlides, 3000); // Ganti gambar setiap 3 detik
+    setTimeout(showSlides, 3000); // Change slide every 3 seconds
   }
 
   showSlides();
-
 });
 </script>
 </html>
