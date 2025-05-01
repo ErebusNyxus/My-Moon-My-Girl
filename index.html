@@ -301,6 +301,28 @@ footer p {
     font-size: 1rem;
     padding: 10px 20px;
   }
+
+  .slideshow-container {
+  position: relative;
+  max-width: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.slideshow-container img {
+  display: none;
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 10px;
+  animation: fadeEffect 1s ease-in-out;
+  border: 1px solid #000;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  margin: 10px 0;
+}
 }
 
 </style>
@@ -410,7 +432,7 @@ footer p {
 
 <script>
 // Set the date we're counting down to
-var countDownDate = new Date("May 14, 2025 00:00:00").getTime(); // Updated date
+var countDownDate = new Date("May 14, 202 00:00:00").getTime(); // Updated date
 
 // Update the count down every 1 second
 var x = setInterval(function() {
