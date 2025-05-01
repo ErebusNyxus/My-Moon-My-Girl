@@ -259,20 +259,17 @@ section {
   cursor: pointer;
 }
 
-/* === Responsiveness for Mobile === */
 @media (max-width: 768px) {
-  /* Aturan untuk popup content di mobile */
   .popup-content {
-    width: 90%; /* Lebar popup menjadi 90% dari lebar layar */
-    padding: 20px; /* Mengurangi padding */
-    max-width: 400px; /* Batasi lebar maksimal */
-    margin: 15% auto; /* Posisikan lebih rendah di layar mobile */
+    width: 90%; 
+    padding: 20px; 
+    max-width: 400px; 
+    margin: 15% auto; 
   }
 
-  /* Mengurangi ukuran font untuk tombol close di mobile */
   .popup-content .close {
     font-size: 1.2rem;
-    right: 15px; /* Posisi tombol close lebih kecil di sisi kanan */
+    right: 15px; 
   }
 }
 
@@ -451,7 +448,7 @@ footer p {
 
 <script>
 // Set the date we're counting down to
-var countDownDate = new Date("May 14, 202 00:00:00").getTime(); // Updated date
+var countDownDate = new Date("May 14, 2025 00:00:00").getTime(); // Updated date
 
 // Update the count down every 1 second
 var x = setInterval(function() {
@@ -586,7 +583,7 @@ var x = setInterval(function() {
     if (slideIndex > slides.length) slideIndex = 1;
 
     slides[slideIndex - 1].classList.add('active');
-    setTimeout(showSlides, 3000); // Change slide every 3 seconds
+    setTimeout(showSlides, 3000);
   }
 
   showSlides();
