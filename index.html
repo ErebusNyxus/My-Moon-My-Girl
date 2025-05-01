@@ -219,6 +219,7 @@ section {
   background-color: #55160f;
 }
 
+/* === Popup Background === */
 .popup {
   display: none;
   position: fixed;
@@ -230,6 +231,7 @@ section {
   background-color: rgba(0, 0, 0, 0.5);
 }
 
+/* === Popup Content === */
 .popup-content {
   background-color: #fffaf0;
   color: #333;
@@ -255,6 +257,23 @@ section {
   font-size: 1.5rem;
   color: #711c13;
   cursor: pointer;
+}
+
+/* === Responsiveness for Mobile === */
+@media (max-width: 768px) {
+  /* Aturan untuk popup content di mobile */
+  .popup-content {
+    width: 90%; /* Lebar popup menjadi 90% dari lebar layar */
+    padding: 20px; /* Mengurangi padding */
+    max-width: 400px; /* Batasi lebar maksimal */
+    margin: 15% auto; /* Posisikan lebih rendah di layar mobile */
+  }
+
+  /* Mengurangi ukuran font untuk tombol close di mobile */
+  .popup-content .close {
+    font-size: 1.2rem;
+    right: 15px; /* Posisi tombol close lebih kecil di sisi kanan */
+  }
 }
 
 @keyframes fadeIn {
